@@ -41,28 +41,32 @@ const Login = (props) => {
     isValid: null,
   });
 
-  // useEffect(() => {
-  //   const identifier = setTimeout(() => {
-  //     setFormIsValid(
-  //       emailState.isValid && enteredPassword.trim().length > 6
-  //     );
-  //   }, 500);
+  // aca abajo destructuramos el objeto asi asignamo s email.isvalid a una variable asi chequeamos solo si esa variable cambio y no cada vez que el objeto cambia
+  const { isValid: emailIsValid } = emailState; // emailState.isValid === emailIsValid
+  const { isValid: passwordIsValid} = passwordState; // passwordState.isValid === passwordIsValid
 
-  //   return () => {
-  //     clearTimeout(identifier);
-  //   };
-  // }, [emailState.value, enteredPassword]);
+  useEffect(() => {
+    const identifier = setTimeout(() => {
+      setFormIsValid(
+        emailIsValid && passwordIsValid
+      );
+    }, 500);
+
+    return () => {
+      clearTimeout(identifier);
+    };
+  }, [emailIsValid, passwordIsValid]);
 
   const emailChangeHandler = (event) => {
     dispatchEmail({ type: "USER_INPUT", val: event.target.value });
 
-    setFormIsValid(emailState.isValid && passwordState.isValid);
+    // setFormIsValid(emailState.isValid && passwordState.isValid);
   };
 
   const passwordChangeHandler = (event) => {
     dispatchPassword({ type: "USER_PASSWORD", val: event.target.value });
 
-    setFormIsValid(emailState.isValid && passwordState.isValid);
+    // setFormIsValid(emailState.isValid && passwordState.isValid);
   };
 
   const validateEmailHandler = () => {
