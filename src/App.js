@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 
 import Login from "./components/Login/Login";
-import Home from "./components/Home/Home";
 import MainHeader from "./components/MainHeader/MainHeader";
 import AuthContext from "./context/auth-context";
+import Market from "./Market/Market";
 
 function App() {
   const ctx = useContext(AuthContext);
@@ -13,7 +13,7 @@ function App() {
       <MainHeader />
       <main>
         {!ctx.isLoggedIn && <Login />}
-        {ctx.isLoggedIn && <Home />}
+        {ctx.isLoggedIn && <Market />}
       </main>
     </React.Fragment>
   );
